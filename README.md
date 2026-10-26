@@ -52,7 +52,17 @@ is annotated (9 R).
 git clone https://github.com/quantiota/SKA-ECG-Heart-Rate-Variability.git
 git clone https://github.com/quantiota/SKA-ECG-Detection-Validation.git
 cd SKA-ECG-Detection-Validation
-wget -r -N -c -np -nd -P data https://physionet.org/files/ludb/1.0.1/
+pip install numpy pandas scipy matplotlib
+
+# LUDB, lead II only: .hea, .dat and the .ii annotations of the 200 records
+mkdir -p data && cd data
+B=https://physionet.org/files/ludb/1.0.1
+wget -q $B/RECORDS $B/SHA256SUMS.txt
+for r in $(sed 's#data/##' RECORDS); do for e in hea dat ii; do wget -q -c $B/data/$r.$e; done; done
+# check every file against PhysioNet's checksums: prints only the files that fail (download them again)
+grep -E 'data/[0-9]+\.(hea|dat|ii)$' SHA256SUMS.txt | sed 's# data/# #' | sha256sum -c --quiet -
+cd ..
+
 python validate_detection.py
 ```
 

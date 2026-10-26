@@ -1,0 +1,6 @@
+wave,annotated,matched,matched_pct,median_abs_error_ms,within_20ms_pct,inside_wave_pct,detected_in_span,false_detections,false_pct
+P,1401,1352,96.5,2.0,97.2,99.0,1559.0,207.0,13.3
+Q,1726,1726,100.0,,,82.1,,,
+R,1817,1726,95.0,2.0,99.0,,1738.0,14.0,0.8
+S,1726,1726,100.0,,,81.1,,,
+T,1642,1480,90.1,4.0,90.7,94.2,1565.0,86.0,5.5

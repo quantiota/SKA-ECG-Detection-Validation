@@ -1,0 +1,4 @@
+data/
+results/*.log
+__pycache__/
+ecg-ska-engine/

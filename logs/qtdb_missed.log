@@ -1,0 +1,11 @@
+               missed  below_threshold  median_energy_ratio  median_gap_prev_ms  median_window_max_ratio
+record   lead                                                                                           
+sel104   V5        39               39                 0.46              2476.0                     1.56
+sel114   V5        12               12                 0.62              1044.0                     4.84
+sel35    ECG1       1                1                 0.43              1012.0                     1.10
+sel37    ECG1       1                1                 0.47              1424.0                     2.68
+sele0111 D3         6                6                 0.78               978.0                     1.49
+sele0124 V4         1                1                 0.98               780.0                     1.45
+sele0129 D3         1                1                 0.92               964.0                     1.94
+sele0133 D3         1                1                 0.99              1092.0                     1.41
+sele0704 V5         1                1                 0.87               780.0                     1.15

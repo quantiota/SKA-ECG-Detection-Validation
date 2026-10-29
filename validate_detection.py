@@ -9,11 +9,15 @@ For every annotated wave, the detected peak of the same beat (the one nearest to
     Q       : inside [QRS onset, R peak]       S : inside [R peak, QRS end]
 False detections: inside the annotated span of a record (first to last annotation), a detected
 P, R or T peak with no annotated wave of the same kind within 150 ms.
-The detector is imported from SKA-ECG-Heart-Rate-Variability unchanged.
+The detector is imported from SKA-ECG-Heart-Rate-Variability unchanged; with --rule new, its Q and S
+are replaced in memory by the new rule of detect_qs.py.
 
     python validate_detection.py
         -> results/ludb_detection.csv, results/ludb_summary.csv, figures/ludb_detection_errors.png
+    python validate_detection.py --rule new
+        -> results/ludb_detection_new.csv, results/ludb_summary_new.csv, figures/ludb_detection_errors_new.png
 """
+import argparse
 import pathlib
 import sys
 
@@ -72,13 +76,21 @@ def waves(ann):
 
 
 def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--rule", choices=["old", "new"], default="old")
+    rule = ap.parse_args().rule
+    det_fn = detect
+    if rule == "new":
+        import detect_qs
+        det_fn = detect_qs.detect
+    tag = "" if rule == "old" else "_new"
     recs = [r.split("/")[-1] for r in (DATA / "RECORDS").read_text().split()]
     rows, det = [], []
     for rec in recs:
         if not (DATA / f"{rec}.{LEAD}").exists():
             continue
         x, fs = read_signal(rec)
-        beats = [ev for ev, _ in detect(x, int(fs))]
+        beats = [ev for ev, _ in det_fn(x, int(fs))]
         tol = TOL * fs
         ann = read_annotations(rec)
         wvs = waves(ann)
@@ -109,7 +121,7 @@ def main():
                                  inside=wv["onset"] <= ev[wv["kind"]] <= wv["end"]))
     d = pd.DataFrame(rows)
     (HERE / "results").mkdir(exist_ok=True); (HERE / "figures").mkdir(exist_ok=True)
-    d.to_csv(HERE / "results" / "ludb_detection.csv", index=False)
+    d.to_csv(HERE / "results" / f"ludb_detection{tag}.csv", index=False)
 
     det = pd.DataFrame(det)
     s = []
@@ -126,7 +138,7 @@ def main():
                       false_detections=None if wave in "QS" else int(det[det.wave == wave].false.sum()),
                       false_pct=None if wave in "QS" else round(100 * det[det.wave == wave].false.mean(), 1)))
     s = pd.DataFrame(s)
-    s.to_csv(HERE / "results" / "ludb_summary.csv", index=False)
+    s.to_csv(HERE / "results" / f"ludb_summary{tag}.csv", index=False)
     print(f"{len(set(d.record))} records, lead {LEAD}")
     print(s.to_string(index=False))
     for wave in "PRT":
@@ -144,8 +156,8 @@ def main():
     ax[0].set_ylabel("waves")
     fig.suptitle(f"LUDB lead II, {len(set(d.record))} records: SKA wave detection vs the cardiologists' annotations")
     fig.tight_layout()
-    fig.savefig(HERE / "figures" / "ludb_detection_errors.png", dpi=110)
-    print(f"saved {HERE / 'figures' / 'ludb_detection_errors.png'}")
+    fig.savefig(HERE / "figures" / f"ludb_detection_errors{tag}.png", dpi=110)
+    print(f"saved {HERE / 'figures' / f'ludb_detection_errors{tag}.png'}")
 
 
 if __name__ == "__main__":

@@ -84,6 +84,25 @@ Q is inside if it lies in [QRS onset, R]; S, in [R, QRS end].
 | sele0111 | D3 | 6 | |
 | sel35, sel37, sele0124, sele0129, sele0133, sele0704 | | 1 each | |
 
+## NeuroKit2
+
+The same QTDB check with [NeuroKit2](https://github.com/neuropsychology/NeuroKit) 0.2.13
+(`ecg_clean` → `ecg_peaks` → `ecg_delineate`):
+
+| | new rule | NeuroKit2 |
+|---|---|---|
+| QRS matched | 98.2 % | 99.5 % |
+| Q inside the QRS | 80.7 % | 35.2 % |
+| Q − QRS onset, median | 12 ms | −20 ms |
+| S inside the QRS | 87.1 % | 64.9 % |
+| S − QRS end, median | −24 ms | −12 ms |
+
+The `peak` and `dwt` methods of `ecg_delineate` give the same Q and S: its source states "No dwt
+defined method for Q and S peak" and "Adopting manual method from "peak" method" (the same holds
+for `cwt`). On the 38 healthy women of SKA-ECG-Heart-Rate-Variability (700 cycles each), NeuroKit2 and
+the SKA detector agree on P, R and T: median difference 1, −1 and 0 ms; within 20 ms in 99.9 %,
+100 % and 100 % of the cycles (median over the 38 women).
+
 ## Files
 
 - `validate_detection.py`: the LUDB validation (`--rule new` for the new rule)

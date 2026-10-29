@@ -10,7 +10,7 @@ New rule   on the same baseline-removed signal xb, walking from R (at most 120 m
     so a one- or two-sample ripple on the slope of R does not stop the walk.
     The search for a minimum starts only once the walk is below half of the R height, so a notch
     on the top of R is not taken for Q or S. If the walk never goes below half of R within 120 ms,
-    the old position is kept.
+    the old position is kept. The Q walk never goes back past the P peak.
 
     import detect_qs; detect_qs.patch()   # ska_complex_events.detect now uses the new rule
 """
@@ -26,9 +26,12 @@ LIMIT_MS, RISE_MS, RISE_MV, HALF = 120, 3, 0.005, 0.5
 _detect_old = sce.detect
 
 
-def minima(xb, r, step, fs):
-    """Successive minima met walking from r in direction step (−1 back, +1 forward), within LIMIT_MS."""
+def minima(xb, r, step, fs, stop=None):
+    """Successive minima met walking from r in direction step (−1 back, +1 forward), within LIMIT_MS
+    and, walking back, not past stop (the P peak)."""
     end = r + step * int(LIMIT_MS * fs / 1000)
+    if stop is not None:
+        end = max(end, stop + 1)
     end = min(max(end, 0), len(xb) - 1)
     need = max(1, round(RISE_MS * fs / 1000))
     i = r                                             # skip the top of R (notches): start below half of R
@@ -58,8 +61,8 @@ def minima(xb, r, step, fs):
     return out or [m]
 
 
-def q_peak(xb, r, fs, old):
-    ms = minima(xb, r, -1, fs)
+def q_peak(xb, r, fs, old, p):
+    ms = minima(xb, r, -1, fs, p)
     return ms[0] if ms else old
 
 
@@ -74,7 +77,7 @@ def detect(x, fs=1000):
     beats = _detect_old(x, fs)
     for ev, base in beats:
         xb = x - base
-        ev["Q"], ev["S"] = q_peak(xb, ev["R"], fs, ev["Q"]), s_peak(xb, ev["R"], fs, ev["S"])
+        ev["Q"], ev["S"] = q_peak(xb, ev["R"], fs, ev["Q"], ev["P"]), s_peak(xb, ev["R"], fs, ev["S"])
     return beats
 
 

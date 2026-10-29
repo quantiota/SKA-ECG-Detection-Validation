@@ -19,6 +19,7 @@ on the same baseline-removed signal, at most 120 ms:
 - A minimum ends when the signal rises from it for at least 3 ms or by more than 0.005 mV.
 - The search starts once the walk is below half of the R height (a notch on the top of R is not a Q
   or an S); if the walk never goes below half of R, the old position is kept.
+- The Q walk never goes back past the P peak.
 
 P, R and T are the same in both rules.
 
@@ -67,7 +68,7 @@ Q is inside if it lies in [QRS onset, R]; S, in [R, QRS end].
 | | old rule | new rule |
 |---|---|---|
 | QRS matched | 98.2 % | 98.2 % |
-| Q inside the QRS | 56.3 % | 80.7 % |
+| Q inside the QRS | 56.3 % | 81.2 % |
 | Q − QRS onset, median | 4 ms | 12 ms |
 | S inside the QRS | 88.6 % | 87.1 % |
 | S − QRS end, median | −24 ms | −24 ms |
@@ -92,7 +93,7 @@ The same QTDB check with [NeuroKit2](https://github.com/neuropsychology/NeuroKit
 | | new rule | NeuroKit2 |
 |---|---|---|
 | QRS matched | 98.2 % | 99.5 % |
-| Q inside the QRS | 80.7 % | 35.2 % |
+| Q inside the QRS | 81.2 % | 35.2 % |
 | Q − QRS onset, median | 12 ms | −20 ms |
 | S inside the QRS | 87.1 % | 64.9 % |
 | S − QRS end, median | −24 ms | −12 ms |

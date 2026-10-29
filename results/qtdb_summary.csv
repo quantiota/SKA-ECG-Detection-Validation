@@ -1,3 +1,3 @@
 detector,annotated_qrs,records,matched_pct,Q_found_pct,Q_inside_qrs_pct,Q_median_ms_from_onset,S_found_pct,S_inside_qrs_pct,S_median_ms_from_end
 old,3528,104,98.2,100.0,56.3,4.0,100.0,88.6,-24.0
-new,3528,104,98.2,100.0,80.7,12.0,100.0,87.1,-24.0
+new,3528,104,98.2,100.0,81.2,12.0,100.0,87.1,-24.0

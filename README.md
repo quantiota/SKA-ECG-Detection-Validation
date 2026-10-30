@@ -23,6 +23,10 @@ on the same baseline-removed signal, at most 120 ms:
 
 P, R and T are the same in both rules.
 
+**Status.** All SKA ECG repositories were learned with the old rule, the detector published in
+[`complex-events/ska_complex_events.py`](https://github.com/quantiota/SKA-ECG-Heart-Rate-Variability/tree/main/complex-events).
+The new rule is validated here only; it is not yet applied in any repository.
+
 ## Data
 
 [LUDB](https://physionet.org/content/ludb/1.0.1/), the Lobachevsky University Electrocardiography

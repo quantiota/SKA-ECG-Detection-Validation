@@ -1,0 +1,4 @@
+interval,records,beats_median,median_marked,median_detected,sd_marked,sd_detected,iqr_marked,iqr_detected,sd_correlation
+P→R,97,30.00,168.00,164.00,7.73,8.05,8.00,8.00,0.19
+R→T,76,30.00,268.00,291.00,8.87,7.24,11.00,8.00,0.39
+T→P,71,29.00,444.00,440.00,27.61,28.12,34.00,36.00,0.95

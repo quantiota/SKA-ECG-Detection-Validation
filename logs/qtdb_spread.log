@@ -1,0 +1,116 @@
+sel100 MLII 30 marked beats
+sel102 V5 85 marked beats
+sel103 MLII 30 marked beats
+sel104 V5 77 marked beats
+sel114 V5 50 marked beats
+sel116 MLII 50 marked beats
+sel117 MLII 30 marked beats
+sel123 MLII 30 marked beats
+sel14046 ECG1 31 marked beats
+sel14157 ECG1 30 marked beats
+sel14172 ECG1 50 marked beats
+sel15814 ECG1 30 marked beats
+sel16265 ECG1 30 marked beats
+sel16272 ECG1 30 marked beats
+sel16273 ECG1 30 marked beats
+sel16420 ECG1 30 marked beats
+sel16483 ECG1 30 marked beats
+sel16539 ECG1 30 marked beats
+sel16773 ECG1 30 marked beats
+sel16786 ECG1 30 marked beats
+sel16795 ECG1 30 marked beats
+sel17152 ECG1 30 marked beats
+sel17453 ECG1 30 marked beats
+sel213 MLII 71 marked beats
+sel221 MLII 30 marked beats
+sel223 MLII 31 marked beats
+sel230 MLII 50 marked beats
+sel231 MLII 50 marked beats
+sel232 MLII 30 marked beats
+sel233 MLII 30 marked beats
+sel30 ECG1 30 marked beats
+sel301 ECG1 30 marked beats
+sel302 ECG1 30 marked beats
+sel306 ECG1 36 marked beats
+sel307 ECG1 30 marked beats
+sel308 ECG1 50 marked beats
+sel31 ECG1 30 marked beats
+sel310 ECG1 30 marked beats
+sel32 ECG1 30 marked beats
+sel33 ECG1 30 marked beats
+sel34 ECG1 30 marked beats
+sel35 ECG1 31 marked beats
+sel36 ECG1 1 marked beats
+sel37 ECG1 30 marked beats
+sel38 ECG1 30 marked beats
+sel39 ECG1 30 marked beats
+sel40 ECG1 30 marked beats
+sel41 ECG1 30 marked beats
+sel42 ECG1 30 marked beats
+sel43 ECG1 30 marked beats
+sel44 ECG1 30 marked beats
+sel45 ECG1 30 marked beats
+sel46 ECG1 30 marked beats
+sel47 ECG1 30 marked beats
+sel48 ECG1 30 marked beats
+sel49 ECG1 30 marked beats
+sel50 ECG1 32 marked beats
+sel51 ECG1 30 marked beats
+sel52 ECG1 30 marked beats
+sel803 ECG1 30 marked beats
+sel808 ECG1 30 marked beats
+sel811 ECG1 30 marked beats
+sel820 ECG1 30 marked beats
+sel821 ECG1 30 marked beats
+sel840 ECG1 70 marked beats
+sel847 ECG1 33 marked beats
+sel853 ECG1 30 marked beats
+sel871 ECG1 70 marked beats
+sel872 ECG1 30 marked beats
+sel873 ECG1 33 marked beats
+sel883 ECG1 30 marked beats
+sel891 ECG1 71 marked beats
+sele0104 D3 30 marked beats
+sele0106 D3 30 marked beats
+sele0107 D3 34 marked beats
+sele0110 V3 30 marked beats
+sele0111 D3 30 marked beats
+sele0112 D3 50 marked beats
+sele0114 D3 30 marked beats
+sele0116 V4 30 marked beats
+sele0121 V4 30 marked beats
+sele0122 V4 30 marked beats
+sele0124 V4 50 marked beats
+sele0126 V4 30 marked beats
+sele0129 D3 30 marked beats
+sele0133 D3 30 marked beats
+sele0136 D3 30 marked beats
+sele0166 V4 36 marked beats
+sele0170 V4 30 marked beats
+sele0203 CM5 30 marked beats
+sele0210 CM5 30 marked beats
+sele0211 CM5 30 marked beats
+sele0303 V2-V3 30 marked beats
+sele0405 CM5 30 marked beats
+sele0406 CM5 31 marked beats
+sele0409 CM5 30 marked beats
+sele0411 CM5 30 marked beats
+sele0509 V1-V2 30 marked beats
+sele0603 CM5 30 marked beats
+sele0604 CM2 30 marked beats
+sele0606 CM5 30 marked beats
+sele0607 CM5 30 marked beats
+sele0609 CM5 30 marked beats
+sele0612 CM5 30 marked beats
+sele0704 V5 30 marked beats
+
+T error (detected − marked), ms
+  marked T negative: 945 beats, 45 records, median 120, within 20 ms 5.9 %
+  marked T on the baseline: 13 beats, 8 records, median 4, within 20 ms 46.2 %
+  marked T positive: 2493 beats, 82 records, median 4, within 20 ms 85.6 %
+
+interval  records  beats_median  median_marked  median_detected  sd_marked  sd_detected  iqr_marked  iqr_detected  sd_correlation
+     P→R       97          30.0          168.0            164.0       7.73         8.05         8.0           8.0            0.19
+     R→T       76          30.0          268.0            291.0       8.87         7.24        11.0           8.0            0.39
+     T→P       71          29.0          444.0            440.0      27.61        28.12        34.0          36.0            0.95
+saved results/qtdb_spread_beats.csv, results/qtdb_spread.csv, results/qtdb_spread_summary.csv, figures/qtdb_spread.png

@@ -108,17 +108,56 @@ for `cwt`). On the 38 healthy women of SKA-ECG-Heart-Rate-Variability (700 cycle
 the SKA detector agree on P, R and T: median difference 1, −1 and 0 ms; within 20 ms in 99.9 %,
 100 % and 100 % of the cycles (median over the 38 women).
 
+## QTDB: T peak and the spread of the intervals
+
+QTDB also marks the P peak and the T peak on the selected beats. For every marked beat, the
+detected beat whose R is nearest (within 150 ms) is compared (`qtdb_spread.py`, old rule).
+
+**T peak.** The detector takes T as the highest point of [R + 120 ms, R + 0.6 RR]: it expects a
+positive T. In QTDB, 27.4 % of the marked T are negative (inverted T).
+
+| marked T | beats | records | detected − marked, median | within 20 ms |
+|---|---|---|---|---|
+| positive | 2,493 | 82 | 4 ms | 85.6 % |
+| negative | 945 | 45 | 120 ms | 5.9 % |
+| on the baseline | 13 | 8 | 4 ms | 46.2 % |
+
+**Spread.** On the same beats, the interval between two waves is measured from the marks and from
+the detector; per record (at least 10 beats), its SD and IQR. R→T and T→P are taken on the beats
+whose marked T is positive. The QTDB mark of a beat is its QRS fiducial point, not always the R peak,
+so the lengths of P→R and R→T differ by a few ms between the marks and the detector; the spreads
+are compared.
+
+| interval | records | beats per record | SD marked | SD detected | IQR marked | IQR detected | SD marked vs detected, correlation over the records |
+|---|---|---|---|---|---|---|---|
+| P→R | 97 | 30 | 7.7 ms | 8.1 ms | 8 ms | 8 ms | 0.19 |
+| R→T | 76 | 30 | 8.9 ms | 7.2 ms | 11 ms | 8 ms | 0.39 |
+| T→P | 71 | 29 | 27.6 ms | 28.1 ms | 34 ms | 36 ms | 0.95 |
+
+(medians over the records)
+
+![SD of the intervals per record, marks vs detector](figures/qtdb_spread.png)
+
+The waves inside the cycle vary by a few ms; T→P carries the variability of the rhythm, and the
+detector follows the marks on it record by record. In 15 of the 97 records the detected P→R spreads
+much more than the marked one (detected SD above 15 ms where the marked SD is below 10 ms): there the
+detected P is not the marked P.
+
 ## Files
 
 - `validate_detection.py`: the LUDB validation (`--rule new` for the new rule)
 - `detect_qs.py`: the new Q and S rule
 - `qtdb_check.py`: Q and S on QTDB, old and new rule
 - `qtdb_missed.py`: the missed QRS against the R threshold
+- `qtdb_spread.py`: the T peak and the spread of P→R, R→T, T→P on QTDB
 - `results/ludb_detection.csv`, `results/ludb_detection_new.csv`: one row per annotated wave
 - `results/ludb_summary.csv`, `results/ludb_summary_new.csv`: the LUDB table
 - `results/qtdb_qs.csv`: one row per marked QRS and rule; `results/qtdb_summary.csv`: the QTDB table
 - `results/qtdb_missed.csv`: the missed QRS
-- `figures/ludb_detection_errors.png`, `figures/ludb_detection_errors_new.png`, `figures/qtdb_qs.png`
+- `results/qtdb_spread_beats.csv`: one row per marked beat; `results/qtdb_spread.csv`: the spread per
+  record and interval; `results/qtdb_spread_summary.csv`: the spread table
+- `figures/ludb_detection_errors.png`, `figures/ludb_detection_errors_new.png`, `figures/qtdb_qs.png`,
+  `figures/qtdb_spread.png`
 - `logs/`
 
 ## Run
@@ -150,6 +189,7 @@ python validate_detection.py
 python validate_detection.py --rule new
 python qtdb_check.py
 python qtdb_missed.py
+python qtdb_spread.py
 ```
 
 ## Reference

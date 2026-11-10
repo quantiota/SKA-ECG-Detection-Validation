@@ -1,5 +1,9 @@
 # SKA ECG Detection Validation
 
+<p align="center">
+  <a href="AMAZON_SERIES_URL"><img src="https://raw.githubusercontent.com/quantiota/Kindle-SKA-Labs/main/assets/ska-series-banner.jpg" alt="Foundations of Structured Knowledge Accumulation — the textbook series" width="100%"></a>
+</p>
+
 The SKA ECG learner reads one step per wave, P → Q → R → S → T. The waves are found in the raw
 ECG by [`complex-events/ska_complex_events.py`](https://github.com/quantiota/SKA-ECG-Heart-Rate-Variability/tree/main/complex-events)
 of [SKA-ECG-Heart-Rate-Variability](https://github.com/quantiota/SKA-ECG-Heart-Rate-Variability).
